@@ -3,7 +3,7 @@
 
 //Importe sendo feito
 import{openModal, closeModal} from './modal.js'
-import{readClientes, criarCliente, deletarCliente} from './clientes.js'
+import{readClientes, criarCliente, deletarCliente, selecionarCliente, editarCliente} from './clientes.js'
 
 //Criando as tr 
 const createTr = (cliente) => {
@@ -54,13 +54,50 @@ const salvarCliente = async () => {
     carregarTabela()
 }
 
+const preencherTabela = (dados) =>{
+    const id = document.getElementById('id')
+    id.value = dados['id']
+
+    const nome = document.getElementById('nome')
+    nome.value = dados['nome']
+
+    const email = document.getElementById('email')
+    email.value = dados['email'] 
+
+    const celular = document.getElementById('celular')
+    celular.value = dados['celular']
+
+    const cidade = document.getElementById('cidade')
+    cidade.value = dados['cidade']
+}
+
+const editarTabela = async (codigo) =>{
+    const cliente = {
+        'id': codigo,
+        'nome': document.getElementById('nome').value,
+        'email': document.getElementById('email').value,
+        'celular': document.getElementById('celular').value,
+        'cidade': document.getElementById('cidade').value
+    }
+    //Enviar para o servidor API
+     await editarCliente(codigo,cliente)
+
+     closeModal()
+
+     carregarTabela()
+}
+
 const actionCliente = async (event) => {
     if (event.target.type == 'button'){
 
         const [action,codigo] = event.target.id.split('-')
 
         if(action == 'editar'){
-            //função para editar o cliente
+            console.log('action')
+           openModal('editar');
+           console.log(codigo);
+            const dados = await selecionarCliente(codigo);
+            preencherTabela(dados)    
 
         }else if(action == 'excluir'){
            await deletarCliente(codigo)
@@ -73,9 +110,11 @@ const actionCliente = async (event) => {
 carregarTabela()
 
 //Eventos
-
-document.getElementById('cadastrarCliente').addEventListener('click', openModal)
+// porque só funciona com arrow function???????
+document.getElementById('cadastrarCliente').addEventListener('click', ()=> openModal('cadastrar') )
 
 document.getElementById('salvar').addEventListener('click', salvarCliente)
+document.getElementById('editarmodal').addEventListener('click',() => editarTabela(document.getElementById('id').value))
+
 
 document.getElementById('clientes-container').addEventListener('click', actionCliente)

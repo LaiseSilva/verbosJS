@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,9 +11,11 @@
     <link rel="stylesheet" href="./css/button.css">
     <link rel="stylesheet" href="./css/records.css">
     <link rel="stylesheet" href="./css/modal.css">
+
     <script src="./js/app.js" defer type="module"></script>
     <title>CRUD</title>
 </head>
+
 <body>
     <header>
         <h1 class="header-title">Cadastro de Clientes</h1>
@@ -30,7 +33,7 @@
                 </tr>
             </thead>
             <tbody id="clientes-container">
-                
+
             </tbody>
         </table>
         <div class="modal" id="modal">
@@ -40,13 +43,15 @@
                     <span class="modal-close" id="modalClose">&#10006;</span>
                 </header>
                 <form class="modal-form">
-                    <input type="text" class="modal-field" placeholder="Nome do Cliente"    id="nome">
+                    <input type="hidden" id="id" value="id">
+                    <input type="text" class="modal-field" placeholder="Nome do Cliente" id="nome">
                     <input type="email" class="modal-field" placeholder="e-mail do Cliente" id="email">
                     <input type="text" class="modal-field" placeholder="Celular do Cliente" id="celular">
-                    <input type="text" class="modal-field" placeholder="Cidade do Cliente"  id="cidade">
+                    <input type="text" class="modal-field" placeholder="Cidade do Cliente" id="cidade">
                 </form>
                 <footer class="modal-footer">
-                    <button class="button green" id="salvar">Salvar</button>
+                    <button class="button green" hidden id="salvar">Salvar</button>
+                    <button class="button green" hidden id="editarmodal">Editar</button>
                     <button class="button blue" id="cancelar">Cancelar</button>
                 </footer>
             </div>
@@ -56,4 +61,5 @@
         Copyright &copy; Prof. Fernando Leonid
     </footer>
 </body>
+
 </html>
