@@ -93,9 +93,8 @@ const actionCliente = async (event) => {
         const [action,codigo] = event.target.id.split('-')
 
         if(action == 'editar'){
-            console.log('action')
            openModal('editar');
-           console.log(codigo);
+
             const dados = await selecionarCliente(codigo);
             preencherTabela(dados)    
 
